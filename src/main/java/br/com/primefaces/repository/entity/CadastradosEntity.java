@@ -11,7 +11,7 @@ public class CadastradosEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@GenericGenerator(name = "increment", strategy = "increment")
+	
 	private Long idCadastrado;
 
 	@Column(nullable = false)

@@ -20,7 +20,7 @@ public class VisitanteEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	@GenericGenerator(name = "increment", strategy = "increment")
+	
 	private Long id;
 	private String nome;
 	private String RG;
