@@ -1,0 +1,7 @@
+br\com\primefaces\repository\entity\VisitanteEntity.class
+br\com\primefaces\repository\CadastradoRepository.class
+br\com\primefaces\repository\entity\CadastradosEntity.class
+br\com\primefaces\repository\http\Cadastrados.class
+br\com\primefaces\repository\controller\ServiceController.class
+br\com\primefaces\repository\VisitanteRepository.class
+br\com\primefaces\repository\http\Visitante.class
