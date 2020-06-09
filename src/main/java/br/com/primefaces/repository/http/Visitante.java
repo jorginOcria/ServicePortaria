@@ -16,17 +16,19 @@ public class Visitante {
 	private String nome;
 	private String RG;
 	private CadastradosEntity cadastrados;
+	private Boolean status;
 
 	public Visitante() {
 
 	}
 
-	public Visitante(Long id, String nome, String RG, CadastradosEntity cadastrados) {
+	public Visitante(Long id, String nome, String RG, CadastradosEntity cadastrados, Boolean status) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.RG = RG;
 		this.cadastrados = cadastrados;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -60,5 +62,14 @@ public class Visitante {
 	public void setCadastrados(CadastradosEntity cadastrados) {
 		this.cadastrados = cadastrados;
 	}
+
+	public boolean GetStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	
 
 }

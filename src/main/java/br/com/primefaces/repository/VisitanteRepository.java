@@ -36,7 +36,7 @@ public class VisitanteRepository {
 	@SuppressWarnings("unchecked")
 	public List<VisitanteEntity> TodosVisitantes() {
 
-		return this.entityManager.createQuery("SELECT p FROM VisitanteEntity p ORDER BY p.nome").getResultList();
+		return this.entityManager.createQuery("SELECT p FROM VisitanteEntity p where status = true").getResultList();
 	}
 
 	public VisitanteEntity GetVisistante(Long id) {
@@ -57,7 +57,7 @@ public class VisitanteRepository {
 	@SuppressWarnings("unchecked")
 	public List<VisitanteEntity> TodosVisitantesPorId(Long id) {
 
-		return this.entityManager.createQuery("SELECT p FROM VisitanteEntity p where idCadastrado = " + id)
+		return this.entityManager.createQuery("SELECT p FROM VisitanteEntity p where idCadastrado = " + id + " and status = true")
 				.getResultList();
 	}
 

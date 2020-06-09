@@ -28,7 +28,8 @@ public class VisitanteEntity {
 	@ManyToOne
 	@JoinColumn(name = "idCadastrado")
 	private CadastradosEntity cadastrados;
-
+	
+	private Boolean status = true;
 	public Long getId() {
 		return id;
 	}
@@ -59,6 +60,14 @@ public class VisitanteEntity {
 
 	public void setCadastrados(CadastradosEntity cadastrados) {
 		this.cadastrados = cadastrados;
+	}
+	
+	public boolean GetStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 }

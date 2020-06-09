@@ -42,7 +42,8 @@ public class ServiceController {
 		List<Visitante> visitantes = new ArrayList<Visitante>();
 		List<VisitanteEntity> listaEntityVisitantes = repository.TodosVisitantes();
 		for (VisitanteEntity entity : listaEntityVisitantes) {
-			visitantes.add(new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados()));
+			visitantes.add(new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados(),
+					entity.GetStatus()));
 		}
 		return visitantes;
 	}
@@ -54,7 +55,8 @@ public class ServiceController {
 		List<Visitante> visitantes = new ArrayList<Visitante>();
 		List<VisitanteEntity> listaEntityVisitantes = repository.TodosVisitantesPorId(idCadastrado);
 		for (VisitanteEntity entity : listaEntityVisitantes) {
-			visitantes.add(new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados()));
+			visitantes.add(new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados(),
+					entity.GetStatus()));
 		}
 		return visitantes;
 	}
@@ -67,7 +69,8 @@ public class ServiceController {
 		VisitanteEntity entity = repository.GetVisistante(id);
 
 		if (entity != null)
-			return new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados());
+			return new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados(),
+					entity.GetStatus());
 
 		return null;
 	}
@@ -84,6 +87,7 @@ public class ServiceController {
 
 			entity.setNome(visitante.getNome());
 			entity.setRG(visitante.getRG());
+			entity.setStatus(visitante.GetStatus());
 			entity.setCadastrados(visitante.getCadastrados());
 
 			repository.Salvar(entity);
@@ -108,10 +112,12 @@ public class ServiceController {
 		entity.setId(id);
 		entity.setNome(visitante.getNome());
 		entity.setRG(visitante.getRG());
+		entity.setStatus(visitante.GetStatus());
 		entity.setCadastrados(visitante.getCadastrados());
 		repository.Alterar(entity);
 
-		return new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados());
+		return new Visitante(entity.getId(), entity.getNome(), entity.getRG(), entity.getCadastrados(),
+				entity.GetStatus());
 
 	}
 
@@ -164,7 +170,7 @@ public class ServiceController {
 		entity.setCpf(cadastrados.getCpf());
 		List<CadastradosEntity> list = repositoryCadastrado.PesquisarPeloCpf(entity.getCpf(), entity.getIdCadastrado());
 		if (list.size() == 1) {
-			CadastradosEntity classe= list.get(0);
+			CadastradosEntity classe = list.get(0);
 			classe.setSenha(cadastrados.getSenha());
 			return repositoryCadastrado.CriarUsuario(classe);
 		} else {
