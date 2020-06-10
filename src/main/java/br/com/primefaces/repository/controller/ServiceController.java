@@ -1,8 +1,12 @@
 package br.com.primefaces.repository.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -23,17 +27,21 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 import br.com.primefaces.repository.CadastradoRepository;
+import br.com.primefaces.repository.MovimentacaoVisitanteRepository;
 import br.com.primefaces.repository.VisitanteRepository;
 import br.com.primefaces.repository.entity.CadastradosEntity;
+import br.com.primefaces.repository.entity.Movimentacao_visitante;
 import br.com.primefaces.repository.entity.VisitanteEntity;
 import br.com.primefaces.repository.http.Cadastrados;
 import br.com.primefaces.repository.http.Visitante;
+import br.com.primefaces.repository.http.movimentacaoVisitante;
 
 @Path("/service")
 public class ServiceController {
 
 	private final VisitanteRepository repository = new VisitanteRepository();
 	private final CadastradoRepository repositoryCadastrado = new CadastradoRepository();
+	private final MovimentacaoVisitanteRepository repositoryMovimentacao = new MovimentacaoVisitanteRepository();
 
 	@GET
 	@Produces("application/json; charset=UTF-8")
@@ -59,6 +67,23 @@ public class ServiceController {
 					entity.GetStatus()));
 		}
 		return visitantes;
+	}
+
+	@GET
+	@Produces("application/json; charset=UTF-8")
+	@Path("/movimentacoesVisitantes/{idCadastrado}")
+	public List<movimentacaoVisitante> getMovimentacoesPorID(@PathParam("idCadastrado") Long idCadastrado) {
+		List<movimentacaoVisitante> movimentacaoVisitantes = new ArrayList<movimentacaoVisitante>();
+		List<Movimentacao_visitante> listamovimentacaoVisitante = repositoryMovimentacao.todasMovimentacoesPorId(idCadastrado);
+		for (Movimentacao_visitante entity : listamovimentacaoVisitante) {
+			Date date = entity.getHorario(); 
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+			String strDate = dateFormat.format(date); 
+			System.out.println(strDate);
+			movimentacaoVisitantes.add(new movimentacaoVisitante(entity.getId(), entity.getHorario(), entity.getTipo(),
+					entity.getCadastrados(), entity.getVisitantes()));
+		}
+		return movimentacaoVisitantes;
 	}
 
 	@GET
