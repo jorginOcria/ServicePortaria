@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Cadastrados {
 
-	private Long id;
+	private Long idCadastrado;
 	private String cpf;
 	private String senha;
 
@@ -14,18 +14,18 @@ public class Cadastrados {
 
 	}
 
-	public Cadastrados(Long id, String cpf, String senha) {
-		this.id = id;
+	public Cadastrados(Long idCadastrado, String cpf, String senha) {
+		this.idCadastrado = idCadastrado;
 		this.cpf = cpf;
 		this.senha = senha;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getIdCadastrado() {
+		return idCadastrado;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdCadastrado(Long idCadastrado) {
+		this.idCadastrado = idCadastrado;
 	}
 
 	public String getCpf() {

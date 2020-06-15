@@ -1,6 +1,7 @@
 package br.com.primefaces.repository.controller;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,13 +73,15 @@ public class ServiceController {
 	@GET
 	@Produces("application/json; charset=UTF-8")
 	@Path("/movimentacoesVisitantes/{idCadastrado}")
-	public List<movimentacaoVisitante> getMovimentacoesPorID(@PathParam("idCadastrado") Long idCadastrado) {
+	public List<movimentacaoVisitante> getMovimentacoesPorID(@PathParam("idCadastrado") Long idCadastrado)
+			throws ParseException {
 		List<movimentacaoVisitante> movimentacaoVisitantes = new ArrayList<movimentacaoVisitante>();
-		List<Movimentacao_visitante> listamovimentacaoVisitante = repositoryMovimentacao.todasMovimentacoesPorId(idCadastrado);
+		List<Movimentacao_visitante> listamovimentacaoVisitante = repositoryMovimentacao
+				.todasMovimentacoesPorId(idCadastrado);
 		for (Movimentacao_visitante entity : listamovimentacaoVisitante) {
-			Date date = entity.getHorario(); 
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
-			String strDate = dateFormat.format(date); 
+			Date date = entity.getHorario();
+			DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
+			String strDate = dateFormat.format(date);
 			System.out.println(strDate);
 			movimentacaoVisitantes.add(new movimentacaoVisitante(entity.getId(), entity.getHorario(), entity.getTipo(),
 					entity.getCadastrados(), entity.getVisitantes()));
@@ -172,7 +175,7 @@ public class ServiceController {
 
 		CadastradosEntity entity = new CadastradosEntity();
 
-		entity.setIdCadastrado(cadastrados.getId());
+		entity.setIdCadastrado(cadastrados.getIdCadastrado());
 		entity.setCpf(cadastrados.getCpf());
 		entity.setSenha(cadastrados.getSenha());
 		List<CadastradosEntity> list = repositoryCadastrado.Validarlist(entity.getCpf(), entity.getSenha());
@@ -191,7 +194,7 @@ public class ServiceController {
 	public CadastradosEntity CriarUsuario(Cadastrados cadastrados) {
 		CadastradosEntity entity = new CadastradosEntity();
 
-		entity.setIdCadastrado(cadastrados.getId());
+		entity.setIdCadastrado(cadastrados.getIdCadastrado());
 		entity.setCpf(cadastrados.getCpf());
 		List<CadastradosEntity> list = repositoryCadastrado.PesquisarPeloCpf(entity.getCpf(), entity.getIdCadastrado());
 		if (list.size() == 1) {
