@@ -82,7 +82,7 @@ public class ServiceController {
 			Date date = entity.getHorario();
 			DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
 			String strDate = dateFormat.format(date);
-			System.out.println(strDate);
+			
 			movimentacaoVisitantes.add(new movimentacaoVisitante(entity.getId(), entity.getHorario(), entity.getTipo(),
 					entity.getCadastrados(), entity.getVisitantes()));
 		}
