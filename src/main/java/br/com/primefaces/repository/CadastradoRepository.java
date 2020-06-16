@@ -34,7 +34,7 @@ public class CadastradoRepository {
 	public List<CadastradosEntity> PesquisarPeloCpf(String cpf, long id) {
 
 		return this.entityManager
-				.createQuery("SELECT p FROM CadastradosEntity p where cpf like '" + cpf + "' and id = " + id + " ")
+				.createQuery("SELECT p FROM CadastradosEntity p where cpf like '" + cpf + "' and id = " + id + " and tipo like 'morador'")
 				.getResultList();
 	}
 
