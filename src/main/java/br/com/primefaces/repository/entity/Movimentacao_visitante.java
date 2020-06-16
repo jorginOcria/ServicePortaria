@@ -20,7 +20,6 @@ public class Movimentacao_visitante {
 	@SequenceGenerator(name = "movimentacao_visitanteseq", sequenceName = "movimentacao_visitanteseq", allocationSize = 1, initialValue = 1)
 	private int id;
 	
-	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date horario;
 	private String tipo;
