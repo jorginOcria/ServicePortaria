@@ -79,7 +79,8 @@ public class ServiceController {
 		List<Movimentacao_visitante> listamovimentacaoVisitante = repositoryMovimentacao
 				.todasMovimentacoesPorId(idCadastrado);
 		for (Movimentacao_visitante entity : listamovimentacaoVisitante) {
-			Date date = entity.getHorario();
+			Date date = entity.getHorario(); 
+			
 			DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
 			String strDate = dateFormat.format(date);
 			System.out.println(strDate);
