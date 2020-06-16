@@ -19,8 +19,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class VisitanteEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	
+	@GeneratedValue(generator = "visitantes_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "visitantes_seq", sequenceName = "visitantes_seq", allocationSize = 1, initialValue = 1)
 	private Long id;
 	private String nome;
 	private String RG;
